@@ -1,0 +1,76 @@
+# Find our git repo: https://github.com/loopbio/nervana-aeon-feedstock
+
+# N.B. revisit makefiles and requirements.txt files when updating.
+# In particular, we are "unpinning" (making >= instead of ==) their dependencies.
+{% set version = "0.2.6" %}
+
+{% set variant = "openblas" %}
+
+package:
+  name: nervana-aeon
+  version: {{ version }}
+
+source:
+  fn: nervana-aeon-v{{ version }}.tar.gz
+  url: https://github.com/NervanaSystems/aeon/archive/v{{ version }}.tar.gz
+  sha256: 3807105de153fe1e239eb7534a925aca36131491bf03f0d06f0b33eb163eb9f4
+
+build:
+  number: 0
+  skip: true  # [not linux]
+  features:
+    - blas_{{ variant }}
+    - cuda80
+
+requirements:
+
+  build:
+    - python
+
+    # Build only deps
+    - pkg-config
+    - clangdev
+    - cmake
+    - ninja
+
+    # We are not building docs; these will get pip installed but we do not care
+    # - breathe >=4.2.0  # Currently we would need to rerender to get a 3.6 package
+    # - flask
+
+    # Runtimes
+    - numpy x.x
+    - blas 1.1 {{ variant }}
+    - openblas 0.2.19|0.2.19.*
+    - sox
+    - opencv 3.*
+    - pillow >=3.3.1
+
+    # Test, that we do at build time
+    - pytest >=3.0.1
+    - pytest-cov >=2.3.1
+    - cuda80-feature
+
+  run:
+    - python
+    - numpy x.x
+    - sox
+    - opencv 3.*
+    - pillow >=3.3.1
+    - blas 1.1 {{ variant }}
+    - openblas 0.2.19|0.2.19.*
+
+test:
+  requires:
+    - cuda80-feature
+  imports:
+    - aeon
+    # should add something more challenging here
+
+about:
+  home: https://github.com/NervanaSystems/aeon
+  license: Apache 2
+  summary: module for data loading and transforming http://aeon.nervanasys.com
+
+extra:
+  recipe-maintainers:
+    - sdvillal
