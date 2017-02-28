@@ -16,11 +16,17 @@ source:
   sha256: 3807105de153fe1e239eb7534a925aca36131491bf03f0d06f0b33eb163eb9f4
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not linux]
   features:
     - blas_{{ variant }}
     - cuda80
+  script:
+    - HAS_GPU=1 python setup.py install
+    # aeon does not use setuptools, so I think this does not apply
+    #   http://conda-forge.github.io/docs/meta.html#single-verion-externally-managed
+    # If it does, just run afterwards...
+    # - rm -f ${SP_DIR}/nervana_aeon*.egg-info
 
 requirements:
 
@@ -45,11 +51,6 @@ requirements:
     - opencv 3.*
     - pillow >=3.3.1
 
-    # Test, that we do at build time
-    - pytest >=3.0.1
-    - pytest-cov >=2.3.1
-    - cuda80-feature
-
   run:
     - python
     - numpy x.x
@@ -60,15 +61,22 @@ requirements:
     - openblas 0.2.19|0.2.19.*
 
 test:
+  source_files:
+    - test
   requires:
     - cuda80-feature
+    - pytest >=3.0.1
+    - pytest-cov >=2.3.1
   imports:
     - aeon
-    # should add something more challenging here
+  commands:
+    - py.test test
+
 
 about:
   home: https://github.com/NervanaSystems/aeon
   license: Apache 2
+  license_file: LICENSE
   summary: module for data loading and transforming http://aeon.nervanasys.com
 
 extra:
