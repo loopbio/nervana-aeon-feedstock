@@ -26,7 +26,7 @@ build:
     # aeon does not use setuptools, so I think this does not apply
     #   http://conda-forge.github.io/docs/meta.html#single-verion-externally-managed
     # If it does, just run afterwards...
-    # - rm -f ${SP_DIR}/nervana_aeon*.egg-info
+    - rm -f ${SP_DIR}/nervana_aeon*.egg-info
 
 requirements:
 
