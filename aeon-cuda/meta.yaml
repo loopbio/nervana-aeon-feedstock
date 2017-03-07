@@ -1,0 +1,26 @@
+{% extends 'base.yaml' %}
+
+{% block recipe %}
+
+package:
+  name: aeon-cuda
+  version: {{ aeon_cuda_version }}
+
+build:
+  number: 0
+  track_features:
+    - aeon_cuda{{ cuda_version }}
+  features:
+    - cuda{{ cuda_version }}
+
+requirements:
+  run:
+    - aeon
+
+test:
+  requires:
+    - cuda-feature {{ cuda_version }}
+  imports:
+    - aeon
+
+{% endblock %}
