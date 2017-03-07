@@ -1,0 +1,13 @@
+{% set aeon_version = "0.2.7" %}
+{% set blas_variant = "openblas" %}
+
+{% set cuda_version = "8.0" %}
+
+{% set aeon_cuda_version = aeon_version + "_" + cuda_version %}
+
+{% block recipe %}{% endblock %}
+
+extra:
+  recipe-url: https://github.com/loopbio/nervana-aeon-feedstock
+  recipe-maintainers:
+    - sdvillal
