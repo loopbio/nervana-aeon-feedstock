@@ -14,7 +14,7 @@ source:
   sha256: 38228b865d717922bd0469e622c8ad98d02f2e846656e23b4b253b7167450d0d
 
 build:
-  number: 1
+  number: 0
   skip: true  # [not linux]
   features:
     - blas_{{ blas_variant }}
