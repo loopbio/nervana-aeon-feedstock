@@ -1,5 +1,5 @@
-About nervana-aeon
-==================
+About aeon
+==========
 
 Home: https://github.com/NervanaSystems/aeon
 
@@ -20,44 +20,44 @@ Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/loopbio/nervana-aeon/badges/version.svg)](https://anaconda.org/loopbio/nervana-aeon)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/loopbio/nervana-aeon/badges/downloads.svg)](https://anaconda.org/loopbio/nervana-aeon)
+Version: [![Anaconda-Server Badge](https://anaconda.org/loopbio/aeon/badges/version.svg)](https://anaconda.org/loopbio/aeon)
+Downloads: [![Anaconda-Server Badge](https://anaconda.org/loopbio/aeon/badges/downloads.svg)](https://anaconda.org/loopbio/aeon)
 
-Installing nervana-aeon
-=======================
+Installing aeon
+===============
 
-Installing `nervana-aeon` from the `loopbio` channel can be achieved by adding `loopbio` to your channels with:
+Installing `aeon` from the `loopbio` channel can be achieved by adding `loopbio` to your channels with:
 
 ```
 conda config --add channels loopbio
 ```
 
-Once the `loopbio` channel has been enabled, `nervana-aeon` can be installed with:
+Once the `loopbio` channel has been enabled, `aeon` can be installed with:
 
 ```
-conda install nervana-aeon
+conda install aeon
 ```
 
-It is possible to list all of the versions of `nervana-aeon` available on your platform with:
+It is possible to list all of the versions of `aeon` available on your platform with:
 
 ```
-conda search nervana-aeon --channel loopbio
+conda search aeon --channel loopbio
 ```
 
 
 
 
-Updating nervana-aeon-feedstock
-===============================
+Updating aeon-feedstock
+=======================
 
-If you would like to improve the nervana-aeon recipe or build a new
+If you would like to improve the aeon recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `loopbio` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `loopbio` channel.
-Note that all branches in the loopbio/nervana-aeon-feedstock are
+Note that all branches in the loopbio/aeon-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
