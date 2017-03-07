@@ -1,32 +1,28 @@
-# Find our git repo: https://github.com/loopbio/nervana-aeon-feedstock
-
 # N.B. revisit makefiles and requirements.txt files when updating.
 # In particular, we are "unpinning" (making >= instead of ==) their dependencies.
-{% set version = "0.2.6" %}
+{% extends "base.yaml" %}
 
-{% set variant = "openblas" %}
+{% block recipe %}
 
 package:
-  name: nervana-aeon
-  version: {{ version }}
+  name: aeon
+  version: {{ aeon_version }}
 
 source:
-  fn: nervana-aeon-v{{ version }}.tar.gz
-  url: https://github.com/NervanaSystems/aeon/archive/v{{ version }}.tar.gz
-  sha256: 3807105de153fe1e239eb7534a925aca36131491bf03f0d06f0b33eb163eb9f4
+  fn: aeon-v{{ aeon_version }}.tar.gz
+  url: https://github.com/NervanaSystems/aeon/archive/v{{ aeon_version }}.tar.gz
+  sha256: 38228b865d717922bd0469e622c8ad98d02f2e846656e23b4b253b7167450d0d
 
 build:
   number: 1
   skip: true  # [not linux]
   features:
-    - blas_{{ variant }}
-    - cuda80
+    - blas_{{ blas_variant }}
+    - cuda{{ cuda_version }}
+    - aeon_cuda{{ cuda_version }}
   script:
     - HAS_GPU=1 python setup.py install
-    # aeon does not use setuptools, so I think this does not apply
-    #   http://conda-forge.github.io/docs/meta.html#single-verion-externally-managed
-    # If it does, just run afterwards...
-    - rm -f ${SP_DIR}/nervana_aeon*.egg-info
+    # N.B. aeon does not use setuptools
 
 requirements:
 
@@ -45,7 +41,7 @@ requirements:
 
     # Runtimes
     - numpy x.x
-    - blas 1.1 {{ variant }}
+    - blas 1.1 {{ blas_variant }}
     - openblas 0.2.19|0.2.19.*
     - sox
     - opencv 3.*
@@ -57,14 +53,15 @@ requirements:
     - sox
     - opencv 3.*
     - pillow >=3.3.1
-    - blas 1.1 {{ variant }}
+    - blas 1.1 {{ blas_variant }}
     - openblas 0.2.19|0.2.19.*
 
 test:
   source_files:
     - test
   requires:
-    - cuda80-feature
+    - aeon-cuda-feature {{ aeon_cuda_version }}
+    - cuda-feature {{ cuda_version }}
     - pytest >=3.0.1
     - pytest-cov >=2.3.1
   imports:
@@ -72,13 +69,10 @@ test:
   commands:
     - py.test test
 
-
 about:
   home: https://github.com/NervanaSystems/aeon
   license: Apache 2
   license_file: LICENSE
   summary: module for data loading and transforming http://aeon.nervanasys.com
 
-extra:
-  recipe-maintainers:
-    - sdvillal
+{% endblock %}
